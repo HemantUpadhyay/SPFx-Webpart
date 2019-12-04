@@ -79,8 +79,8 @@ export default class MyFisrtWpWebPart extends BaseClientSideWebPart<IMyFisrtWpWe
       <div class="parentContainer" style="background-color: lightgrey">
       <div class="ms-Grid-row ms-bgColor-themeDark ms-fontColor-white ${styles.row}">
       <div class="ms-Grid-col ms-u-lg10 ms-u-xl8 ms-u-xlPush2 ms-u-lgPush1">
-      <span class="ms-font-xl ms-fontColor-white" style="font-size:28px">Welcome to SharePoint Framework Development using PnP JS Library</span>
-      <p class="ms-font-l ms-fontColor-white" style="text-align: left">Demo : SharePoint List CRUD using PnP JS and SPFx</p>
+      <span class="ms-font-xl ms-fontColor-white" style="font-size:28px">Welcome to SharePoint Framework Development using PnP JS By Hemant Upadhyay</span>
+      <p class="ms-font-l ms-fontColor-white" style="text-align: left">Demo : SP List CRUD using PnP JS and SPFx No javascript Framework</p>
       </div>
       </div>
       <div class="ms-Grid-row ms-bgColor-themeDark ms-fontColor-white ${styles.row}">
@@ -95,7 +95,7 @@ export default class MyFisrtWpWebPart extends BaseClientSideWebPart<IMyFisrtWpWe
       </div>
       <div data-role="main" class="ui-content">
       <div >
-      <input id="EmployeeName"  placeholder="EmployeeName"    />
+      <input id="EmployeeName"  placeholder="EmployeeName"  />
       <input id="Experience"  placeholder="Experience"  />
       <input id="Location"  placeholder="Location"    />
       </div>
@@ -126,9 +126,9 @@ export default class MyFisrtWpWebPart extends BaseClientSideWebPart<IMyFisrtWpWe
       this.AddEventListeners();
   }
 
-  protected AddItem():void
+  protected async AddItem()
   {
-    pnp.sp.web.lists.getByTitle('EmployeeList').items.add({
+    await pnp.sp.web.lists.getByTitle('EmployeeList').items.add({
       EmployeeName : document.getElementById('EmployeeName')["value"],
       Experience : document.getElementById('Experience')["value"],
       Location:document.getElementById('Location')["value"]
@@ -136,25 +136,23 @@ export default class MyFisrtWpWebPart extends BaseClientSideWebPart<IMyFisrtWpWe
       alert("Record with Employee Name : "+ document.getElementById('EmployeeName')["value"] + " Added !");
   }
 
-  protected UpdateItem():void
+  protected async UpdateItem()
   {
     var id = document.getElementById('EmployeeId')["value"];
-    pnp.sp.web.lists.getByTitle("EmployeeList").items.getById(id).update({
-    EmployeeName : document.getElementById('EmployeeName')["value"],
-    Experience : document.getElementById('Experience')["value"],
-    Location:document.getElementById('Location')["value"]
-    });
-    alert("Record with Employee Name : "+ document.getElementById('EmployeeName')["value"] + " Updated !");
+    await pnp.sp.web.lists.getByTitle("EmployeeList").items.getById(id).update({
+      EmployeeName : document.getElementById('EmployeeName')["value"],
+      Experience : document.getElementById('Experience')["value"],
+      Location:document.getElementById('Location')["value"]
+      });
+      alert("Record with Employee Name : "+ document.getElementById('EmployeeName')["value"] + " Updated !");
   }
 
-  protected DeleteItem():void
+  protected async DeleteItem()
   {
-    pnp.sp.web.lists.getByTitle("EmployeeList").items.getById(document.getElementById('EmployeeId')["value"]).delete();
+    await pnp.sp.web.lists.getByTitle("EmployeeList").items.getById(document.getElementById('EmployeeId')["value"]).delete();
     alert("Record with Employee ID : "+ document.getElementById('EmployeeId')["value"] + " Deleted !");
   }
-
-
-
+  
   protected get dataVersion(): Version {
     return Version.parse('1.0');
   }
