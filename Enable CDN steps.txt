@@ -10,3 +10,7 @@ o365 spo cdn get --type Public --verbose
 o365 spo cdn set --type Public --enabled true
 o365 spo cdn origin list --type Public
 o365 spo cdn origin add --origin sites/dev/CDNDocs --type Public  ---to enable CDN on Doc library-will take 15 min
+o365 spo cdn origin remove--origin sites/dev/CDNDocs --type Public
+o365 spo cdn policy list --type Public
+
+
